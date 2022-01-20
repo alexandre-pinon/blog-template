@@ -7,14 +7,12 @@ const PostWidget = ({ categories, slug }: Record<string, any>) => {
   const [relatedPosts, setRelatedPosts] = useState([] as any[])
 
   useEffect(() => {
-    setPosts()
+    initPosts()
   }, [slug])
 
-  const setPosts = async () => {
+  const initPosts = async () => {
     setRelatedPosts(slug ? await getSimilarPosts(categories, slug) : await getRecentPosts())
   }
-
-  console.log({ relatedPosts })
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8">

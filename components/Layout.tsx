@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '.'
 
-function Layout({ children }: Record<string, any>) {
+const Layout = ({ children }: Record<string, any>) => {
   return (
     <>
       <Header />

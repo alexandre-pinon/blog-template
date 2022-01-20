@@ -1,12 +1,19 @@
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import React from 'react'
 
-const categories = [
-  { name: 'Genshin Impact', slug: 'shingen' },
-  { name: 'FFXIV', slug: 'final-fantasy-xiv' },
-]
+import { getCategories } from '../services'
 
-function Header() {
+const Header = () => {
+  const [categories, setCategories] = useState([] as any[])
+
+  useEffect(() => {
+    initCategories()
+  }, [])
+
+  const initCategories = async () => {
+    setCategories(await getCategories())
+  }
+
   return (
     <div className="container mx-auto px-10 mb-8">
       <div className="border-b w-full inline-block border-blue-400 py-8">
