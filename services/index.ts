@@ -114,6 +114,68 @@ export const getSimilarPosts = async (categories: string[], slug: string) => {
   return result.posts
 }
 
+export const getFeaturedPosts = async () => {
+  const query = gql`
+    query GetCategoryPost() {
+      posts(where: {featuredPost: true}) {
+        author {
+          name
+          photo {
+            url
+          }
+        }
+        featuredImage {
+          url
+        }
+        title
+        slug
+        createdAt
+      }
+    }   
+  `
+
+  const result = await request(GRAPHQL_API, query)
+
+  return result.posts
+}
+
+export const getCategoryPost = async (slug: string) => {
+  const query = gql`
+    query GetCategoryPost($slug: String!) {
+      postsConnection(where: { categories_some: { slug: $slug } }) {
+        edges {
+          cursor
+          node {
+            author {
+              bio
+              name
+              id
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+            categories {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(GRAPHQL_API, query, { slug })
+
+  return result.postsConnection.edges
+}
+
 export const getCategories = async () => {
   const query = gql`
     query GetCategories {
@@ -127,4 +189,32 @@ export const getCategories = async () => {
   const result = await request(GRAPHQL_API, query)
 
   return result.categories
+}
+
+export const getComments = async (slug: string) => {
+  const query = gql`
+    query GetComments($slug: String!) {
+      comments(where: { post: { slug: $slug } }) {
+        name
+        createdAt
+        comment
+      }
+    }
+  `
+
+  const result = await request(GRAPHQL_API, query, { slug })
+
+  return result.comments
+}
+
+export const submitComment = async (obj: Object) => {
+  const result = await fetch('/api/comments', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  })
+
+  return result.json()
 }
