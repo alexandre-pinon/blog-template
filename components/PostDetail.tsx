@@ -1,6 +1,7 @@
 import React from 'react'
 
 import moment from 'moment'
+import Image from 'next/image'
 
 const PostDetail = ({ post }: Record<string, any>) => {
   const getContentFragment = (index: number, text: any, obj: any, type = '') => {
@@ -46,7 +47,7 @@ const PostDetail = ({ post }: Record<string, any>) => {
           </h4>
         )
       case 'image':
-        return <img key={index} alt={obj.title} height={obj.height} width={obj.width} src={obj.src} />
+        return <Image unoptimized key={index} alt={obj.title} height={obj.height} width={obj.width} src={obj.src} />
       default:
         return modifiedText
     }
@@ -57,14 +58,15 @@ const PostDetail = ({ post }: Record<string, any>) => {
       <div className="relative overflow-hidden shadow-md mb-6">
         <img
           src={post.featuredImage.url}
-          alt=""
+          alt="Post Image"
           className="object-top h-full w-full object-cover  shadow-lg rounded-t-lg lg:rounded-lg"
         />
       </div>
       <div className="px-4 lg:px-0">
         <div className="flex items-center mb-8 w-full">
           <div className="hidden md:flex items-center justify-center lg:mb-0 lg:w-auto mr-8 items-center">
-            <img
+            <Image
+              unoptimized
               alt={post.author.name}
               height="30px"
               width="30px"
