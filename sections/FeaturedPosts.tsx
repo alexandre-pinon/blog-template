@@ -63,12 +63,17 @@ const FeaturedPosts = () => {
     </div>
   )
 
+  const ArrowFix = (arrowProps: any) => {
+    const { carouselState, children, ...restArrowProps } = arrowProps
+    return <span {...restArrowProps}> {children} </span>
+  }
+
   return (
     <div className="mb-8">
       <Carousel
         infinite
-        customLeftArrow={customLeftArrow}
-        customRightArrow={customRightArrow}
+        customLeftArrow={<ArrowFix>{customLeftArrow}</ArrowFix>}
+        customRightArrow={<ArrowFix>{customRightArrow}</ArrowFix>}
         responsive={responsive}
         itemClass="px-4"
       >
