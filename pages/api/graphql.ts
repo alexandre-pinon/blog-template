@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server-express'
 import { Request, Response, Router } from 'express'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { schema } from '../../apollo/schema'
+import { connectToDatabase } from '../../mongoose'
 
 const runMiddleware = (req: Request, res: Response, fn: Router) => {
   return new Promise((resolve, reject) => {
@@ -30,11 +31,12 @@ export const config = {
 }
 
 export default async function handler(req: Request & NextApiRequest, res: Response & NextApiResponse) {
-  console.time('SERVER START')
+  console.time('Server started in')
+  await connectToDatabase()
   await startServer
   const apolloMiddleware = apolloServer.getMiddleware({
     path: '/api/graphql',
   })
-  console.timeEnd('SERVER START')
+  console.timeEnd('Server started in')
   await runMiddleware(req, res, apolloMiddleware)
 }
