@@ -1,12 +1,20 @@
 import { gql } from '@apollo/client'
 
 export const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String!
-    status: String!
+  scalar Upload
+
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
   }
+
   type Query {
-    viewer: User
+    viewer: Boolean
+  }
+
+  type Mutation {
+    # Multiple uploads are supported. See graphql-upload docs for details.
+    singleUpload(file: Upload!): File!
   }
 `

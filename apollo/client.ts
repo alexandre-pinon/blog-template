@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from '@apollo/client'
 import { SchemaLink } from '@apollo/client/link/schema'
-import { schema } from './schema'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
+    const { schema } = require('./schema') // DO NOT IMPORT SERVER STUFF AT THE TOP BECAUSE NEXTJS EHE
     return new SchemaLink({ schema })
   } else {
     return new HttpLink({

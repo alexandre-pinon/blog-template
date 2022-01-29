@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-let uri = process.env.MONGOOSE_URI
+const uri = process.env.MONGOOSE_URI
 let isConnected = false
 
 if (!uri) {
