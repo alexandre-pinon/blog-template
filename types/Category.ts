@@ -1,6 +1,6 @@
 import { Post } from '.'
 
-export type Category = {
+export interface Category {
   name: string
   slug: string
   posts: Post[]

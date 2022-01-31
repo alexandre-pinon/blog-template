@@ -1,6 +1,6 @@
 import { Post } from '.'
 
-export type Comment = {
+export interface Comment {
   name: string
   email: string
   comment: string

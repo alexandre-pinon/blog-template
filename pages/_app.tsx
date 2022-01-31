@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
-import { useApollo } from '../apollo/client'
+import { useApollo } from '../lib/apollo/client'
 import { Layout } from '../components'
 import '../styles/globals.scss'
 

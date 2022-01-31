@@ -1,11 +1,7 @@
 import mongoose from 'mongoose'
+import { mongoURI } from '../../config/env'
 
-const uri = process.env.MONGOOSE_URI
 let isConnected = false
-
-if (!uri) {
-  throw new Error('Please define the MONGOOSE_URI environment variable inside .env.local')
-}
 
 const db = mongoose.connection
 db.on('connecting', () => console.log('Connecting to mongoose...'))
@@ -20,7 +16,7 @@ export const connectToDatabase = async () => {
   }
 
   try {
-    await mongoose.connect(uri as string, { serverSelectionTimeoutMS: 5000 })
+    await mongoose.connect(mongoURI as string, { serverSelectionTimeoutMS: 5000 })
     isConnected = db.readyState === 1
   } catch (error) {
     console.error('INITIAL MONGOOSE CONNECTION ERROR', error)

@@ -1,6 +1,4 @@
-import { Request, Response, Router } from 'express'
-
-const runExpressMiddleware = (req: Request, res: Response, middleware: any) => {
+const runExpressMiddleware = (req: any, res: any, middleware: any) => {
   return new Promise((resolve, reject) => {
     middleware(req, res, (result: any) => {
       if (result instanceof Error) {

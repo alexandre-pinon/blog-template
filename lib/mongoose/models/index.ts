@@ -4,4 +4,4 @@ import { ImageModel } from './ImageModel'
 import { PostModel } from './PostModel'
 import { UserModel } from './UserModel'
 
-export type { CategoryModel, CommentModel, ImageModel, PostModel, UserModel }
+export { CategoryModel, CommentModel, ImageModel, PostModel, UserModel }

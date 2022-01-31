@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import { Category } from '../../types'
+import { Category } from '../../../types'
 
 const schema = new Schema<Category>({
   name: {

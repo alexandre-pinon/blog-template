@@ -3,10 +3,13 @@ import { gql } from '@apollo/client'
 export const typeDefs = gql`
   scalar Upload
 
-  type File {
-    filename: String!
+  type Image {
+    name: String!
+    url: String!
     mimetype: String!
-    encoding: String!
+    height: String
+    width: String
+    size: Int
   }
 
   type Query {
@@ -15,6 +18,7 @@ export const typeDefs = gql`
 
   type Mutation {
     # Multiple uploads are supported. See graphql-upload docs for details.
-    singleUpload(file: Upload!): File!
+    singleUpload(file: Upload!): Image
+    multipleUploads(files: [Upload!]!): [Image]
   }
 `

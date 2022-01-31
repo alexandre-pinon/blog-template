@@ -1,6 +1,6 @@
 import { Image, Post } from '.'
 
-export type User = {
+export interface User {
   name: string
   photo: Image
   bio: string

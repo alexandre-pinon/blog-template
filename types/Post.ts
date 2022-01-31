@@ -1,6 +1,6 @@
 import { Category, Comment, Image, User } from '.'
 
-export type Post = {
+export interface Post {
   title: string
   excerpt: string
   slug: string
