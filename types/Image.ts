@@ -9,4 +9,8 @@ export interface Image {
   size?: number
 }
 
+/*
+? Remove once apollo-datasource-mongodb is updated?
+* Source: https://github.com/GraphQLGuide/apollo-datasource-mongodb/issues/88
+*/
 export interface ImageDoc extends Image, Document {}

@@ -11,31 +11,30 @@ export const ImageResolver = {
   // by the `graphql-upload` package.
   Upload: GraphQLUpload,
 
+  // TODO: Check if file exists before upload to GCS
   Mutation: {
     singleUpload: async (
       _parent: any,
       { file }: Record<string, FileUpload>,
       { dataSources }: CustomResolversContext
-    ) => {
-      const image = await uploadFile(file)
-      const res = dataSources.imageDatasource.insertImages(image)
-      res.then((res) => console.log({ res })).catch((err) => console.error(err))
-      return image
+      ) => {
+      const imageData = await uploadImageToGCS(file)
+      dataSources.imageDatasource.insertImagesIfNotExists([imageData])
+      return imageData
     },
     multipleUploads: async (
       _parent: any,
       { files }: Record<string, FileUpload[]>,
       { dataSources }: CustomResolversContext
     ) => {
-      const images = await Promise.all(files.map(uploadFile))
-      const res = dataSources.imageDatasource.insertImages(images)
-      res.then((res) => console.log({ res })).catch((err) => console.error(err))
-      return images
+      const imagesData = await Promise.all(files.map(uploadImageToGCS))
+      dataSources.imageDatasource.insertImagesIfNotExists(imagesData)
+      return imagesData
     },
   },
 }
 
-const uploadFile = async (file: FileUpload) => {
+const uploadImageToGCS = async (file: FileUpload) => {
   const { createReadStream, filename, mimetype } = await file
   const slugifiedFileName = slugify(filename, { lower: true })
 

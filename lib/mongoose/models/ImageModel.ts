@@ -9,6 +9,7 @@ const schema = new Schema<ImageDoc>({
   url: {
     type: String,
     required: [true, 'An image needs an url'],
+    unique: true,
   },
   mimetype: {
     type: String,
