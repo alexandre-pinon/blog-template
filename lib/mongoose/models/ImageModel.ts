@@ -6,6 +6,11 @@ const schema = new Schema<ImageDoc>({
     type: String,
     required: [true, 'An image needs a name'],
   },
+  slug: {
+    type: String,
+    required: [true, 'An image needs a slug'],
+    unique: true,
+  },
   url: {
     type: String,
     required: [true, 'An image needs an url'],

@@ -2,6 +2,7 @@ import { Document } from 'mongoose'
 
 export interface Image {
   name: string
+  slug: string
   url: string
   mimetype: string
   height?: string

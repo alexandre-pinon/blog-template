@@ -6,6 +6,7 @@ export const typeDefs = gql`
   type Image {
     name: String!
     url: String!
+    slug: String!
     mimetype: String!
     height: String
     width: String
